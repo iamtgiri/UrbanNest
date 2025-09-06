@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import joblib
 from geopy.geocoders import Nominatim
-import shap
+# import shap
 
 
 # === Model Load ===
@@ -186,24 +186,24 @@ if st.button("Predict Price"):
         }).sort_values(by='Importance', ascending=False)
 
         # SHAP: Local Explanation
-        try:
+        # try:
             
 
             # st.subheader("Key Drivers for This Prediction (Local SHAP Explanation)")
-            st.markdown("<h5>Most Important Factors That Influenced This Prediction</h5>", unsafe_allow_html=True)
-            explainer = shap.Explainer(model_step)
-            shap_values = explainer(X_input)
-            shap_df = pd.DataFrame({
-                'Feature': feature_columns,
-                'SHAP Value': shap_values.values[0]
-            }).sort_values(by='SHAP Value', key=abs, ascending=False)
+        #     st.markdown("<h5>Most Important Factors That Influenced This Prediction</h5>", unsafe_allow_html=True)
+        #     explainer = shap.Explainer(model_step)
+        #     shap_values = explainer(X_input)
+        #     shap_df = pd.DataFrame({
+        #         'Feature': feature_columns,
+        #         'SHAP Value': shap_values.values[0]
+        #     }).sort_values(by='SHAP Value', key=abs, ascending=False)
 
-            st.write(shap_df.head(10))
-            st.caption("*SHAP values show the direct influence of each feature on this specific prediction.*")
+        #     st.write(shap_df.head(10))
+        #     st.caption("*SHAP values show the direct influence of each feature on this specific prediction.*")
 
-        except Exception as e:
-            st.warning("Local explanation (SHAP) couldn't be generated. Ensure SHAP is installed and supported by the model.")
-            st.exception(e)
+        # except Exception as e:
+        #     st.warning("Local explanation (SHAP) couldn't be generated. Ensure SHAP is installed and supported by the model.")
+        #     st.exception(e)
 
         # Feature Importance: Global Explaination
         st.markdown('<h5>Top Factors That Influence Predictions (Overall)</h5>', unsafe_allow_html=True)
