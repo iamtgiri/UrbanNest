@@ -30,15 +30,45 @@ model_metrics = {
 }
 
 # === Geolocation Utility ===
-def get_coordinates(address):
+# def get_coordinates(address):
+#     try:
+#         geolocator = Nominatim(user_agent="geoapi_kolkata_project")
+#         location = geolocator.geocode(address)
+#         if location:
+#             return location.latitude, location.longitude
+#     except:
+#         pass
+#     return 22.5959, 88.4026  # Default (Kolkata)
+
+import asyncio
+from geopy.geocoders import Nominatim
+from geopy.location import Location
+from typing import Tuple
+
+def _sync_geocode(geolocator, address: str):
+    result = geolocator.geocode(address)
+
+    if asyncio.iscoroutine(result):
+        # If it's a coroutine, run it synchronously
+        return asyncio.get_event_loop().run_until_complete(result)
+
+    return result
+
+def get_coordinates(address: str) -> Tuple[float, float]:
+    geolocator = Nominatim(user_agent="geoapi_kolkata_project")
+
     try:
-        geolocator = Nominatim(user_agent="geoapi_kolkata_project")
-        location = geolocator.geocode(address)
-        if location:
+        location = _sync_geocode(geolocator, address)
+        if isinstance(location, Location):
             return location.latitude, location.longitude
-    except:
-        pass
-    return 22.5959, 88.4026  # Default (Kolkata)
+    except Exception as e:
+        print("Geocoding failed:", e)
+
+    return 22.5959, 88.4026
+
+
+
+
 
 # === Sidebar UI ===
 st.sidebar.title("🏠 House Features")
