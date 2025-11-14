@@ -6,6 +6,11 @@ import joblib
 from geopy.geocoders import Nominatim
 # import shap
 
+import os
+print("CWD:", os.getcwd())
+print("Files:", os.listdir())
+print("Models exists:", os.path.exists("models"))
+
 
 # === Model Load ===
 model_paths = {
