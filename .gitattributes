@@ -1,2 +1,3 @@
 # Treat all notebooks as vendored (excluded from language stats)
 notebooks/*.ipynb linguist-vendored
+Archive/PROJECT__FILES/*.ipynb linguist-vendored
