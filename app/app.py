@@ -6,25 +6,21 @@ import joblib
 from geopy.geocoders import Nominatim
 # import shap
 
-import os
-print("CWD:", os.getcwd())
-print("Files:", os.listdir())
-print("Models exists:", os.path.exists("models"))
 
 
 # === Model Load ===
 model_paths = {
-    'ElasticNet': 'app/models/elasticnet_model.pkl',
-    'Random Forest': 'app/models/random_forest_model.pkl',
-    'Gradient Boosting': 'app/models/gradient_boosting_model.pkl',
-    'XGBoost': 'app/models/xgboost_model.pkl'
+    'ElasticNet': '../models/elasticnet_model.pkl',
+    'Random Forest': '../models/random_forest_model.pkl',
+    'Gradient Boosting': '../models/gradient_boosting_model.pkl',
+    'XGBoost': '../models/xgboost_model.pkl'
 }
 
 column_paths = {
-    'ElasticNet': 'app/models/elasticnet_model_columns.pkl',
-    'Random Forest': 'app/models/random_forest_model_columns.pkl',
-    'Gradient Boosting': 'app/models/gradient_boosting_model_columns.pkl',
-    'XGBoost': 'app/models/xgboost_model_columns.pkl'
+    'ElasticNet': '../models/elasticnet_model_columns.pkl',
+    'Random Forest': '../models/random_forest_model_columns.pkl',
+    'Gradient Boosting': '../models/gradient_boosting_model_columns.pkl',
+    'XGBoost': '../models/xgboost_model_columns.pkl'
 }
 models = {name: joblib.load(path) for name, path in model_paths.items()}
 
